@@ -1,5 +1,5 @@
 # Terraform POC 
-The design was to develop a solution or framework (HCLIF – Hitachi Cloud Infrastructure) which would create the infrastructure irrespective of the underlying cloud service. AWS/Google Cloud/Azure (This POC for AWS Provider).
+The design was to develop a solution or framework (HCLIF – Hitachi Cloud Infrastructure) which would create the infrastructure irrespective of the underlying cloud service. AWS/Google Cloud/Azure (POC for AWS Provider).
 
 # Basic requirments
 * terraform installed
