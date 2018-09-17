@@ -1,0 +1,22 @@
+{
+  "name": "hclif",
+  "version": "1.0.0",
+  "description": "Hitachi Cloud Infrastructure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUNILPCA/HCLIF.git"
+  },
+  "author": "Sunil Behera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SUNILPCA/HCLIF/issues"
+  },
+  "homepage": "https://github.com/SUNILPCA/HCLIF#readme",
+  "dependencies": {
+    "yargs": "^12.0.2"
+  }
+}
