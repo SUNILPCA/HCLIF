@@ -1,5 +1,5 @@
-access_key = "AKIAJSYIPKBQEFJLMIFQ"
-secret_key = "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"
+access_key = "acces_key"
+secret_key = "secret_key"
 
 blueprint = {
   "serverless" 		= "1"
