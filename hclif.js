@@ -2,13 +2,14 @@
 
 let ChildProcess = require('child_process');
 
+
 /**
  * Initializes the terraform working directory
  * @param {String} dir The directory of the infrastructure code
  * @returns {Promise} Resolves to undefined for Rejects with an error
  */
 exports.terraformInit = function (dir) {
-  return runCommand('terraform', ['init'], dir)
+  return runCommand('terraform', ['init'], 'infrastructure_'+dir.provider)
     .catch(error => {
       if (error) {
         return Promise.reject(new Error("terraform init failed: " + error.message));
@@ -24,8 +25,8 @@ exports.terraformInit = function (dir) {
  * @returns {Promise} Resolves to undefined for Rejects with an error
  */
 exports.terraformPlan = function (dir) {
-  // terraform plan
-  return runCommand('terraform', ['plan'], dir)
+  // terraform plan  
+  return runCommand('terraform', ['plan', '-var=blueprint_key='+dir.blueprint], 'infrastructure_'+dir.provider)
     .catch(error => {
       if (error) {
         return Promise.reject(new Error("terraform plan failed: " + error.message));
@@ -43,7 +44,7 @@ exports.terraformPlan = function (dir) {
  */
 exports.terraformApply = function (dir) {
   // terraform apply
-  return runCommand('terraform', ['apply', '-auto-approve'], dir)
+  return runCommand('terraform', ['apply', '-var=blueprint_key='+dir.blueprint, '-auto-approve'], 'infrastructure_'+dir.provider)
     .catch(error => {
       if (error) {
         return Promise.reject(new Error("terraform apply failed: " + error.message));
@@ -60,7 +61,7 @@ exports.terraformApply = function (dir) {
  */
 exports.terraformDestroy = function (dir) {
   // terraform apply
-  return runCommand('terraform', ['destroy', '-auto-approve'], dir)
+  return runCommand('terraform', ['destroy', '-var=blueprint_key='+dir.blueprint, '-auto-approve'], 'infrastructure_'+dir.provider)
     .catch(error => {
       if (error) {
         return Promise.reject(new Error("terraform destroy failed: " + error.message));

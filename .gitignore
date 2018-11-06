@@ -2,6 +2,9 @@
 dist
 node_modules
 npm-debug.log
+kep_pair
 .terraform
 terraform.tfstate
 terraform.tfstate.backup
+terraform.tfvars
+terraform_poc.pem
