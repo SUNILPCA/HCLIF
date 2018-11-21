@@ -12,7 +12,6 @@
 # cidr_blocks		:	CIDR blocks are a concise way to specify IP address ranges
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 resource "aws_instance" "webserver" {
-	count		  = "${var.count}"
 	ami           = "${var.amis}"
 	instance_type = "${var.instance_type}"
 	key_name 	  = "${var.key_name}"
@@ -24,14 +23,13 @@ resource "aws_instance" "webserver" {
 	
 	user_data = "${var.user_data}" 
 	tags {
-		Name = "${var.environment}"
+		Name = "${var.application}"
 	}
 }
 
 # Creating Security Group for EC2
 resource "aws_security_group" "instance" {
-	count		= "${var.count}"
-	name 		= "${var.environment}_sg"
+	name 		= "${var.application}_sg"
 	description = "Allow incoming HTTP connections & SSH access"
 
 	ingress {
@@ -56,7 +54,7 @@ resource "aws_security_group" "instance" {
 	}
 
 	tags {
-		Name = "${var.environment} Server SG"
+		Name = "${var.application} Server SG"
 	}
 }
 

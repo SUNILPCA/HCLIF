@@ -1,10 +1,8 @@
-resource "aws_route53_zone" "myzone" {
-	count = "${var.count}"
+resource "aws_route53_zone" "myzone" {	
 	name = "${var.domain_name}"
 }
 
-resource "aws_route53_record" "www-a" {
-	count = "${var.count}"
+resource "aws_route53_record" "www-a" {	
 	zone_id = "${aws_route53_zone.myzone.zone_id}"
 	name    = "${var.domain_name}"
 	type    = "A"
@@ -16,8 +14,7 @@ resource "aws_route53_record" "www-a" {
 	}
 }
 
-resource "aws_route53_record" "apex" {
-	count = "${var.count}"
+resource "aws_route53_record" "apex" {	
 	zone_id = "${aws_route53_zone.myzone.zone_id}"
 	name    = "${var.domain_name}"
 	type    = "A"

@@ -12,7 +12,7 @@ function userInput() {
 				message: 'Please select provider [aws], [azure], [google]',
 				required: true,
 				warning: 'Must select aws or azure or google',
-				default: 'aws',				
+				default: 'azure',				
 				before: function(value) { 
 					if(value === 'aws' || value === 'azure' || value === 'google') {
 						return value; 
@@ -37,6 +37,13 @@ function userInput() {
 						return false;
 					}
 				}		
+			},
+			appname: {
+				type: 'string',				
+				message: 'Enter resource name want to destroy, example hcc-app/web-app/static-app',
+				required: true,
+				warning: 'Must select webserver or serverless or staticwebsite',
+				default: 'myapp'
 			}
 		}
 	}

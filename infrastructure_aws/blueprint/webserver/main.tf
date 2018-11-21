@@ -18,7 +18,7 @@
 data "aws_availability_zones" "all" {}
 module "launch_configurations_web" {
 	source 							= "../../component/launch_configurations"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}"
 	webserver_security_group_id 	= ["${module.web_instances.webserver_security_group_id}"]
 	amis							= "${var.amis}"
@@ -28,7 +28,7 @@ module "launch_configurations_web" {
 }
 module "launch_configurations_app" {
 	source 							= "../../component/launch_configurations"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}"
 	webserver_security_group_id 	= ["${module.app_instances.webserver_security_group_id}"]
 	amis							= "${var.amis}"
@@ -38,7 +38,7 @@ module "launch_configurations_app" {
 }
 module "load_balancers" {
 	source 							= "../../component/load_balancers"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}"
 	webserver_availability_zones 	= ["${data.aws_availability_zones.all.names}"]
 	amis							= "${var.amis}"
@@ -47,7 +47,7 @@ module "load_balancers" {
 }
 module "autoscaling_groups_web" {
 	source 							= "../../component/autoscaling_groups"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}-web"
 	webserver_lc_id 				= "${module.launch_configurations_web.webserver_lc_id}"
 	webserver_availability_zones 	= ["${data.aws_availability_zones.all.names}"]
@@ -61,7 +61,7 @@ module "autoscaling_groups_web" {
 }
 module "autoscaling_groups_app" {
 	source 							= "../../component/autoscaling_groups"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}-app"
 	webserver_lc_id 				= "${module.launch_configurations_app.webserver_lc_id}"
 	webserver_availability_zones 	= ["${data.aws_availability_zones.all.names}"]
@@ -75,7 +75,7 @@ module "autoscaling_groups_app" {
 }
 module "web_instances" {
 	source 							= "../../component/instances"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}_webserver"
 	amis							= "${var.amis}"
 	instance_type					= "${var.instance_type}"
@@ -86,7 +86,7 @@ module "web_instances" {
 }
 module "app_instances" {
 	source 							= "../../component/instances"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}_appserver"
 	amis							= "${var.amis}"
 	instance_type					= "${var.instance_type}"
@@ -97,13 +97,13 @@ module "app_instances" {
 }
 module "s3" {
 	source 							= "../../component/s3"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}"
 	domain_name						= "${var.domain_name}"
 }
 module "route53" {
 	source								= "../../component/route53"
-	count								= "${var.count}"
+	application							= "${var.application}"
 	environment 						= "${var.environment}"
 	domain_name							= "${var.domain_name}"
 	cloudfront_website_domain_name 		= "${module.cloud_front.cloudfront_website_domain_name}"
@@ -113,7 +113,7 @@ module "route53" {
 }
 module "cloud_front" {
 	source 							= "../../component/cloud_front"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}"
 	domain_name						= "${var.domain_name}"
 	enabled							= "${var.enabled}"
@@ -124,7 +124,7 @@ module "cloud_front" {
 }
 module "rds" {
 	source 							= "../../component/rds"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}"
 	vpc_id          				= "${module.vpc.vpc_id}"
 	subnets         				= ["${module.vpc.private_subnets_id}"]
@@ -155,7 +155,7 @@ module "rds" {
 }
 module "vpc" {
 	source 							= "../../component/vpc"
-	count							= "${var.count}"
+	application						= "${var.application}"
 	environment 					= "${var.environment}"
 	cidr_block 						= "${var.cidr_block}"	
 	private_subnets_cidr_block 		= ["${var.private_subnets_cidr_block}"]

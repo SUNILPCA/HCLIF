@@ -1,13 +1,12 @@
-variable "environment" {
-  description = "the name of the environment for infra deployment on AWS account"
-  default = "terraform-poc"
-}
 variable "application" {
-  description = "Application name used for tagging AWS resources"
-  default     = "Data Application"
+  description = "Application name used for tagging AZURE resources"
+  default     = "terraform-poc"
 }
-variable "access_key" {}
-variable "secret_key" {}
-variable "region" {
-  default = "us-west-2"
+variable "client_id" {}
+variable "client_secret" {}
+variable "environment" {
+  description = "the name of the environment for infra deployment on AZURE account"
+  default = "dev"
 }
+variable "subscription_id" {}
+variable "tenant_id" {}

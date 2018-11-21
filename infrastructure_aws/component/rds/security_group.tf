@@ -1,18 +1,17 @@
 # Create RDS with Subnet and paramter group,
 resource "aws_security_group" "sg_rds" {
-	count		= "${var.count}"
-	name        = "${length(var.name) == 0 ? "${var.environment}${var.tag}" : var.name}-rds"
+	name        = "${length(var.name) == 0 ? "${var.application}${var.tag}" : var.name}-rds"
 	description = "Security group that is needed for the RDS"
 	vpc_id      = "${var.vpc_id}"
 
 	tags {
-		Name        = "${length(var.name) == 0 ? "${var.environment}${var.tag}" : var.name}-rds"
-		Environment = "${var.environment}"
+		Name        = "${length(var.name) == 0 ? "${var.application}${var.tag}" : var.name}-rds"
+		Environment = "${var.application}"
 	}
 }
 
 resource "aws_security_group_rule" "rds_sg_in" {	
-	count                    = "${length(var.security_groups) == 0 ? 0 : length(var.security_groups)}"
+	count                    = "${length(var.security_groups)}"
 	security_group_id        = "${aws_security_group.sg_rds.id}"
 	type                     = "ingress"
 	from_port                = "${local.port}"
@@ -22,7 +21,7 @@ resource "aws_security_group_rule" "rds_sg_in" {
 }
 
 resource "aws_security_group_rule" "rds_cidr_in" {	
-	count             = "${length(var.allowed_cidr_blocks) == 0 ? 0 : 1}"
+	count             = "${length(var.allowed_cidr_blocks)}"
 	security_group_id = "${aws_security_group.sg_rds.id}"
 	type              = "ingress"
 	from_port         = "${local.port}"

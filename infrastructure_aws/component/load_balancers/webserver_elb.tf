@@ -1,7 +1,6 @@
 # Creating ELB
 resource "aws_elb" "webserver_elb" {
-	count = "${var.count}"
-	name = "${var.environment}-elb"
+	name = "${var.application}-elb"
 	security_groups = ["${aws_security_group.elb-security_groups.id}"]
 	availability_zones = ["${var.webserver_availability_zones}"]
 
@@ -24,8 +23,7 @@ resource "aws_elb" "webserver_elb" {
 
 # Security Group for ELB
 resource "aws_security_group" "elb-security_groups" {
-	count = "${var.count}"
-	name = "${var.environment}-elb"
+	name = "${var.application}-elb"
 
 	# Allow all outbound
 	egress {

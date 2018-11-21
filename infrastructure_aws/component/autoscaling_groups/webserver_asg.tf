@@ -1,16 +1,15 @@
 # Creating AutoScaling Group
 resource "aws_autoscaling_group" "webserver_asg" {
-	count = "${var.count}"
+	name = "${var.application}-webserver_asg"
 	launch_configuration = "${var.webserver_lc_id}"
-	availability_zones = ["${var.webserver_availability_zones}"]
-	name = "${var.environment}-webserver_asg"
+	availability_zones = ["${var.webserver_availability_zones}"]	
 	max_size = "${var.asg_max}"
 	min_size = "${var.asg_min}"
 	load_balancers = ["${var.webserver_elb_name}"]
 	health_check_type = "ELB"
 	tag {
 		key = "Name"
-		value = "${var.environment}-asg"
+		value = "${var.application}-asg"
 		propagate_at_launch = true
 	}	
 	lifecycle {
@@ -20,8 +19,7 @@ resource "aws_autoscaling_group" "webserver_asg" {
 
 # Scale Up Policy and Alarm
 resource "aws_autoscaling_policy" "scale_up" {
-	count = "${var.count}"
-	name = "${var.environment}_asg_scale_up"
+	name = "${var.application}_asg_scale_up"
 	scaling_adjustment = 2
 	adjustment_type = "ChangeInCapacity"
 	cooldown = 300
@@ -29,8 +27,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "scale_up_alarm" {
-	count = "${var.count}"
-	alarm_name = "${var.environment}_high_asg_cpu"
+	alarm_name = "${var.application}_high_asg_cpu"
 	comparison_operator = "GreaterThanThreshold"
 	evaluation_periods = "2"
 	metric_name = "CPUUtilization"
@@ -48,8 +45,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_up_alarm" {
 
 # Scale Down Policy and Alarm
 resource "aws_autoscaling_policy" "scale_down" {
-	count = "${var.count}"
-	name = "${var.environment}_asg_scale_down"
+	name = "${var.application}_asg_scale_down"
 	scaling_adjustment = -1
 	adjustment_type = "ChangeInCapacity"
 	cooldown = 600
@@ -57,8 +53,7 @@ resource "aws_autoscaling_policy" "scale_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
-	count = "${var.count}"
-	alarm_name = "${var.environment}_low_asg_cpu"
+	alarm_name = "${var.application}_low_asg_cpu"
 	comparison_operator = "LessThanThreshold"
 	evaluation_periods = "5"
 	metric_name = "CPUUtilization"

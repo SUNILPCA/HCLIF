@@ -1,0 +1,13 @@
+variable "application" {}
+variable "create_mode" {}
+variable "collation" {}
+variable "edition" {}
+variable "environment" {}
+variable "end_ip_address" {}
+variable "location" {}
+variable "resource_group_name" {}
+variable "requested_service_objective_name" {}
+variable "sql_admin" {}
+variable "sql_password" {}
+variable "start_ip_address" {}
+#variable "version" {}

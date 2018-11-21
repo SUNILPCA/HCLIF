@@ -1,5 +1,5 @@
+variable "application" {}
 variable "environment" {}
-variable "count" {}
 variable "vpc_id" {}
 variable "security_groups" {
 	type = "list"

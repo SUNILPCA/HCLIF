@@ -1,10 +1,9 @@
 locals {
-  s3_origin_id = "${var.environment}WebsiteS3"
-  s3_apex_origin_id = "${var.environment}WebsiteS3Apex"
+  s3_origin_id = "${var.application}WebsiteS3"
+  s3_apex_origin_id = "${var.application}WebsiteS3Apex"
 }
 
-resource "aws_cloudfront_distribution" "website" {
-	count			= "${var.count}"
+resource "aws_cloudfront_distribution" "website" {	
 	enabled 		= "${var.enabled}"
 	is_ipv6_enabled = "${var.is_ipv6_enabled}"
 	
@@ -47,7 +46,6 @@ resource "aws_cloudfront_distribution" "website" {
 }
 
 resource "aws_cloudfront_distribution" "website-apex" {
-	count			= "${var.count}"
 	enabled 		= "${var.enabled}"
 	is_ipv6_enabled = "${var.is_ipv6_enabled}"
 	

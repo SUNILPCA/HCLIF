@@ -1,5 +1,5 @@
+variable "application" {}
 variable "environment" {}
-variable "count" {}
 variable "aws_region" {}
 variable "instance_tenancy" {}
 variable "enable_dns_hostnames" {}

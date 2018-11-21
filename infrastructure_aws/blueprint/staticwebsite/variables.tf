@@ -1,14 +1,11 @@
+variable "application" {}
 variable "access_key" {}
 variable "secret_key" {}
 variable "environment" {}
-variable "count" {}
 variable "region" {
   default = "us-west-2"
 }
-variable "application" {
-  description = "Application name used for tagging AWS resources"
-  default     = "Application Name"
-}
+
 #-------------------------------------------------------------------------
 # Global Customized variable, which are used for web application hosting 
 # blue print (Web server/Application hosting at EC2 instances)
@@ -21,7 +18,7 @@ variable "amis" {
 
 # EC2 Instance type
 variable "instance_type" {
-  default = "t2.micro"
+	default = "t2.micro"
 }
 
 # EC2 Instance running on port
@@ -30,13 +27,13 @@ variable "server_port" {
 	default = 8080
 }
 variable "public_key_path" {
- description = "Enter the path to the SSH Public Key to add to AWS."
- default = "/key_pair/terraform_poc.pem"
+	description = "Enter the path to the SSH Public Key to add to AWS."
+	default = "/key_pair/terraform_poc.pem"
 }
 
 variable "key_name" {
- description = "Key name for SSHing into EC2"
- default = "terraform_poc"
+	description = "Key name for SSHing into EC2"
+	default = "terraform_poc"
 }
 
 #S3 bucket domain name

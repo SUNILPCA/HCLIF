@@ -10,7 +10,6 @@
 #					(e.g. when replacing an EC2 Instance, always create the new Instance before deleting the old one).
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 resource "aws_launch_configuration" webserver_lc{
-	count			= "${var.count}"
 	image_id       	= "${var.amis}"
 	instance_type 	= "${var.instance_type}"
 	security_groups = ["${var.webserver_security_group_id}"]

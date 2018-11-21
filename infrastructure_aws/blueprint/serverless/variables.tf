@@ -1,4 +1,4 @@
 variable "access_key" {}
-variable "secret_key" {}
+variable "application" {}
 variable "environment" {}
-variable "count" {}
+variable "secret_key" {}

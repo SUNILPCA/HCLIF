@@ -1,5 +1,5 @@
+variable "application" {}
 variable "environment" {}
-variable "count" {}
 variable "amis" {}
 variable "instance_type" {}
 variable "server_port" {}

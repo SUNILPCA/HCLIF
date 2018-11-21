@@ -1,0 +1,11 @@
+variable "application" {}
+variable "app_service_plan_sku_size" {}
+variable "app_service_plan_sku_tier" {}
+variable "dotnet_framework_version" {}
+variable "environment" {}
+variable "location" {}
+variable "random_integer_max" {}
+variable "random_integer_min" {}
+variable "resource_group_name" {}
+variable "remote_debugging_enabled" {}
+variable "remote_debugging_version" {}
