@@ -9,9 +9,9 @@ variable "image" {
 variable "machine_type" {
 	default = "f1-micro"
 }
-#variable "tag" {
-#	default = "http-tag"
-#}
+variable "tag" {
+	default = "http-tag"
+}
 
 # SQL Instance Variables
 variable activation_policy {

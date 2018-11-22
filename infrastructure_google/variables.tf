@@ -8,10 +8,11 @@ variable "environment" {
 }
 variable "project_id" {}
 variable "region" {
-	#default = "us-central1"
-	default = "us-west1"
+	default = "us-central1"
+	#default = "us-west1"
 }
-#variable "zone" {
-#	default = "us-central1-b"
-#}
+variable "zone" {
+	#default = "us-west1-b"
+	default = "us-central1-b"
+}
 

@@ -1,6 +1,6 @@
 # Master CloudSQL
 resource "google_sql_database_instance" "master" {
-	name                	= "${var.application}-sql-master-test1"
+	name                	= "${var.application}-sql-master-demo"
 	database_version     	= "${var.database_version}"
 
 	settings {
@@ -27,7 +27,7 @@ resource "google_sql_database_instance" "master" {
 }
 # Replica CloudSQL
 resource "google_sql_database_instance" "master_replica" {
-	name                 = "${var.application}-sql-replica-test1"
+	name                 = "${var.application}-sql-replica-demo"
 	database_version     = "${var.database_version}"
 	master_instance_name = "${google_sql_database_instance.master.name}"
 	
