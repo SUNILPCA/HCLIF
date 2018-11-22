@@ -9,3 +9,4 @@ terraform.tfstate
 terraform.tfstate.backup
 terraform.tfvars
 terraform_poc.pem
+terraform_state_files
