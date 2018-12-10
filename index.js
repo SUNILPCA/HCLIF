@@ -25,13 +25,13 @@ function userInput() {
 			},
 			blueprint: {				
 				type: 'string',				
-				validator: /webserver*|serverless*|staticwebsite*/,
-				message: colors.blue('\n webserver - Web Application Hosting infrastructure \n serverless -  Serverl less application with API Gateway and dynamoDB infrastructure \n staticwebsite - S3 bucket with static web site enable infrastructure\n')+colors.magenta('Please select blueprint [webserver], [serverless], [staticwebsite]'),
+				validator: /webapplication*|serverless*|staticwebsite*/,
+				message: colors.blue('\n webapplication - Web Application Hosting infrastructure \n serverless -  Serverl less application with API Gateway and dynamoDB infrastructure \n staticwebsite - S3 bucket with static web site enable infrastructure\n')+colors.magenta('Please select blueprint [webapplication], [serverless], [staticwebsite]'),
 				required: true,
-				warning: colors.red('Must select webserver or serverless or staticwebsite'),
-				default: 'webserver',
+				warning: colors.red('Must select webapplication or serverless or staticwebsite'),
+				default: 'webapplication',
 				before: function(value) { 
-					if(value === 'webserver' || value === 'serverless' || value === 'staticwebsite') {
+					if(value === 'webapplication' || value === 'serverless' || value === 'staticwebsite') {
 						return value; 
 					}
 					else {
@@ -43,14 +43,14 @@ function userInput() {
 				type: 'string',				
 				message: colors.magenta('Enter environment name as per your convenience, example dev/stage/prod'),
 				required: true,
-				warning: colors.red('Must select webserver or serverless or staticwebsite'),
+				warning: colors.red('Must select webapplication or serverless or staticwebsite'),
 				default: 'dev'
 			},
 			appname: {
 				type: 'string',				
 				message: colors.magenta('Enter application name as per your convenience, example hccapp/webapp/staticapp'),
 				required: true,
-				warning: colors.red('Must select webserver or serverless or staticwebsite'),
+				warning: colors.red('Must select webapplication or serverless or staticwebsite'),
 				default: 'myapp'
 			}
 		}

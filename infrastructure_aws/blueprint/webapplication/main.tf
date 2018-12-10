@@ -18,7 +18,7 @@
 data "aws_availability_zones" "all" {}
 module "launch_configurations_web" {
 	source 							= "../../component/launch_configurations"
-	application						= "${var.application}"
+	application						= "${var.application}-web"
 	environment 					= "${var.environment}"
 	webserver_security_group_id 	= ["${module.web_instances.webserver_security_group_id}"]
 	amis							= "${var.amis}"
@@ -28,7 +28,7 @@ module "launch_configurations_web" {
 }
 module "launch_configurations_app" {
 	source 							= "../../component/launch_configurations"
-	application						= "${var.application}"
+	application						= "${var.application}-app"
 	environment 					= "${var.environment}"
 	webserver_security_group_id 	= ["${module.app_instances.webserver_security_group_id}"]
 	amis							= "${var.amis}"
@@ -47,8 +47,8 @@ module "load_balancers" {
 }
 module "autoscaling_groups_web" {
 	source 							= "../../component/autoscaling_groups"
-	application						= "${var.application}"
-	environment 					= "${var.environment}-web"
+	application						= "${var.application}-web"
+	environment 					= "${var.environment}"
 	webserver_lc_id 				= "${module.launch_configurations_web.webserver_lc_id}"
 	webserver_availability_zones 	= ["${data.aws_availability_zones.all.names}"]
 	webserver_elb_name 				= "${module.load_balancers.webserver_elb_name}" 
@@ -61,8 +61,8 @@ module "autoscaling_groups_web" {
 }
 module "autoscaling_groups_app" {
 	source 							= "../../component/autoscaling_groups"
-	application						= "${var.application}"
-	environment 					= "${var.environment}-app"
+	application						= "${var.application}-app"
+	environment 					= "${var.environment}"
 	webserver_lc_id 				= "${module.launch_configurations_app.webserver_lc_id}"
 	webserver_availability_zones 	= ["${data.aws_availability_zones.all.names}"]
 	webserver_elb_name 				= "${module.load_balancers.webserver_elb_name}" 
@@ -75,7 +75,7 @@ module "autoscaling_groups_app" {
 }
 module "web_instances" {
 	source 							= "../../component/instances"
-	application						= "${var.application}"
+	application						= "${var.application}-web"
 	environment 					= "${var.environment}_webserver"
 	amis							= "${var.amis}"
 	instance_type					= "${var.instance_type}"
@@ -86,7 +86,7 @@ module "web_instances" {
 }
 module "app_instances" {
 	source 							= "../../component/instances"
-	application						= "${var.application}"
+	application						= "${var.application}-app"
 	environment 					= "${var.environment}_appserver"
 	amis							= "${var.amis}"
 	instance_type					= "${var.instance_type}"

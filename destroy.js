@@ -24,13 +24,13 @@ function userInput() {
 			},
 			blueprint: {				
 				type: 'string',				
-				validator: /webserver*|serverless*|staticwebsite*/,
-				message: 'Please select blueprint [webserver], [serverless], [staticwebsite]',
+				validator: /webapplication*|serverless*|staticwebsite*/,
+				message: 'Please select blueprint [webapplication], [serverless], [staticwebsite]',
 				required: true,
-				warning: 'Must select webserver or serverless or staticwebsite',
-				default: 'webserver',
+				warning: 'Must select webapplication or serverless or staticwebsite',
+				default: 'webapplication',
 				before: function(value) { 
-					if(value === 'webserver' || value === 'serverless' || value === 'staticwebsite') {
+					if(value === 'webapplication' || value === 'serverless' || value === 'staticwebsite') {
 						return value; 
 					}
 					else {
@@ -42,7 +42,7 @@ function userInput() {
 				type: 'string',				
 				message: 'Enter resource name want to destroy, example hcc-app/web-app/static-app',
 				required: true,
-				warning: 'Must select webserver or serverless or staticwebsite',
+				warning: 'Must select webapplication or serverless or staticwebsite',
 				default: 'myapp'
 			}
 		}

@@ -1,5 +1,5 @@
 module "blueprint" {
-	source = "./blueprint/serverless"
+	source = "./blueprint/webserver"
   
 	application 	= "${var.application}"
 	environment 	= "${var.environment}"
